@@ -1,0 +1,14 @@
+{
+  "details": {
+    "endpoint": "http://localhost:5000",
+    "methodFqn": "ecommerce.ProductInfo.addProduct",
+    "mode": "grpc"
+  },
+  "requests": [
+    {
+      "location": "addProduct-request.json"
+    }
+  ],
+  "operationType": "unary",
+  "invokerName": "grpc"
+}

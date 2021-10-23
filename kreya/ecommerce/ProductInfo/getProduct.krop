@@ -1,0 +1,14 @@
+{
+  "details": {
+    "endpoint": "http://localhost:5000",
+    "methodFqn": "ecommerce.ProductInfo.getProduct",
+    "disableServerCertificateValidation": true
+  },
+  "requests": [
+    {
+      "location": "getProduct-request.json"
+    }
+  ],
+  "operationType": "unary",
+  "invokerName": "grpc"
+}
