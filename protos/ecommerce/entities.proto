@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package ecommerce;
+
+option go_package = "service/";
+
+// import "google/protobuf/wrappers.proto";
+
+message Product {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+}
+
+message ProductID {
+    string value = 1;
+}

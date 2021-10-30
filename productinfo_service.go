@@ -12,7 +12,7 @@ import (
 
 type Server struct {
 	pb.UnimplementedProductInfoServer
-
+	
 	productMap map[string]*pb.Product
 }
 
