@@ -4,8 +4,6 @@ package ecommerce;
 
 option go_package = "service/";
 
-// import "google/protobuf/wrappers.proto";
-
 message Product {
     string id = 1;
     string name = 2;
@@ -14,4 +12,12 @@ message Product {
 
 message ProductID {
     string value = 1;
+}
+
+message Order {
+    string id = 1;
+    string description = 2;
+    float price = 3;
+    repeated string items = 4;
+    string destination = 5;
 }
