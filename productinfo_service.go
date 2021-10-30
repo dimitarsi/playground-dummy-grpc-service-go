@@ -10,13 +10,13 @@ import (
 )
 
 
-type Server struct {
+type ProductInfoServer struct {
 	pb.UnimplementedProductInfoServer
 	
 	productMap map[string]*pb.Product
 }
 
-func (s *Server) AddProduct(ctx context.Context, in *pb.Product) (*pb.ProductID, error) {
+func (s *ProductInfoServer) AddProduct(ctx context.Context, in *pb.Product) (*pb.ProductID, error) {
 	out, err := uuid.NewUUID()
 
 	if err != nil {
@@ -34,7 +34,7 @@ func (s *Server) AddProduct(ctx context.Context, in *pb.Product) (*pb.ProductID,
 	return &pb.ProductID{ Value: in.Id}, status.New(codes.OK, "").Err()
 }
 
-func (s *Server) GetProduct(ctx context.Context, in *pb.ProductID) (*pb.Product, error) {
+func (s *ProductInfoServer) GetProduct(ctx context.Context, in *pb.ProductID) (*pb.Product, error) {
 
 	if s.productMap == nil || s.productMap[in.Value] == nil {
 		return nil, status.Errorf(codes.NotFound, "Product not found", in)

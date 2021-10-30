@@ -5,10 +5,8 @@ package ecommerce;
 option go_package = "service/";
 
 import "protos/ecommerce/entities.proto";
-import "google/protobuf/wrappers.proto";
 
 service ProductInfo {
     rpc addProduct(Product) returns (ProductID);
     rpc getProduct(ProductID) returns (Product);
-    rpc getOrder(google.protobuf.StringValue) returns (Order);
 }

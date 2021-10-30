@@ -20,9 +20,12 @@ func main() {
 	}
 
 	s := grpc.NewServer()
-	server := &Server{}
+	productInfoServer := &ProductInfoServer{}
+	orderManagementServer := &OrderManagementServer{}
 
-	service.RegisterProductInfoServer(s, server)
+	service.RegisterProductInfoServer(s, productInfoServer)
+	service.RegisterOrderManagementServer(s, orderManagementServer)
+
 
 	log.Printf("Listening on port %s", port)
 

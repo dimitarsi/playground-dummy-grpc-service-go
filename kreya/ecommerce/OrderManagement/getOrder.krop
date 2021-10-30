@@ -1,0 +1,12 @@
+{
+  "details": {
+    "methodFqn": "ecommerce.OrderManagement.getOrder"
+  },
+  "requests": [
+    {
+      "location": "getOrder-request.json"
+    }
+  ],
+  "operationType": "unary",
+  "invokerName": "grpc"
+}
