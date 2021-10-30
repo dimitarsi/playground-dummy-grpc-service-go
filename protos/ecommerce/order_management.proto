@@ -11,4 +11,5 @@ import "google/protobuf/wrappers.proto";
 
 service OrderManagement {
     rpc getOrder(google.protobuf.StringValue) returns (Order);
+    rpc searchOrder(google.protobuf.StringValue) returns (stream Order);
 }

@@ -2,6 +2,9 @@ package main
 
 import (
 	"context"
+	"fmt"
+	"log"
+	"strings"
 
 	pb "github.com/dimitarsi/hello-grpc/service"
 	"google.golang.org/grpc/codes"
@@ -11,8 +14,39 @@ import (
 
 type OrderManagementServer struct {
 	pb.UnimplementedOrderManagementServer
+
+	OrdersMap map[string]pb.Order
 }
 
 func (s *OrderManagementServer) GetOrder(_ context.Context, in *wrapperspb.StringValue) (*pb.Order, error) {
 	return &pb.Order{}, status.New(codes.OK, "").Err()
+}
+
+func (s *OrderManagementServer) SearchOrder(in *wrapperspb.StringValue, server pb.OrderManagement_SearchOrderServer) error {
+
+	for _, order := range s.OrdersMap {
+		if strings.Contains(order.Description, in.Value) || 
+			findItemInOrder(order.Items, in.Value) {
+			err := server.Send(&order)
+
+			if err != nil {
+				return fmt.Errorf("error sending to stream %w", err)
+			}
+
+			log.Printf("Matching order found - %s", order.Id)
+		}
+	}
+
+
+	return nil
+}
+
+func findItemInOrder(items []string, needle string) bool {
+	for _, item := range items {
+		if strings.ContainsAny(item, needle) {
+			return true
+		}
+	}
+
+	return false
 }

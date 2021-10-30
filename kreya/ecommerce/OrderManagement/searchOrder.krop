@@ -1,10 +1,10 @@
 {
   "details": {
-    "methodFqn": "ecommerce.ProductInfo.getOrder"
+    "methodFqn": "ecommerce.OrderManagement.searchOrder"
   },
   "requests": [
     {
-      "location": "getOrder-request.json"
+      "location": "searchOrder-request.json"
     }
   ],
   "operationType": "serverStreaming",
