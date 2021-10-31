@@ -9,10 +9,9 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-
 type ProductInfoServer struct {
 	pb.UnimplementedProductInfoServer
-	
+
 	productMap map[string]*pb.Product
 }
 
@@ -29,9 +28,9 @@ func (s *ProductInfoServer) AddProduct(ctx context.Context, in *pb.Product) (*pb
 		s.productMap = make(map[string]*pb.Product)
 	}
 
-	s.productMap[in.Id] = in;
+	s.productMap[in.Id] = in
 
-	return &pb.ProductID{ Value: in.Id}, status.New(codes.OK, "").Err()
+	return &pb.ProductID{Value: in.Id}, status.New(codes.OK, "").Err()
 }
 
 func (s *ProductInfoServer) GetProduct(ctx context.Context, in *pb.ProductID) (*pb.Product, error) {

@@ -27,7 +27,7 @@ func (s *OrderManagementServer) GetOrder(_ context.Context, in *wrapperspb.Strin
 func (s *OrderManagementServer) SearchOrder(in *wrapperspb.StringValue, server pb.OrderManagement_SearchOrderServer) error {
 
 	for _, order := range s.OrdersMap {
-		if strings.Contains(order.Description, in.Value) || 
+		if strings.Contains(order.Description, in.Value) ||
 			findItemInOrder(order.Items, in.Value) {
 			err := server.Send(&order)
 
@@ -39,10 +39,8 @@ func (s *OrderManagementServer) SearchOrder(in *wrapperspb.StringValue, server p
 		}
 	}
 
-
 	return nil
 }
-
 
 func (s *OrderManagementServer) UpdateOrders(stream pb.OrderManagement_UpdateOrdersServer) error {
 	counter := 0
@@ -60,12 +58,11 @@ func (s *OrderManagementServer) UpdateOrders(stream pb.OrderManagement_UpdateOrd
 		counter += 1
 
 		id := fmt.Sprintf("%d", uuid.New().ID())
-		order.Id = id;
+		order.Id = id
 
 		s.OrdersMap[id] = *order
 	}
 }
-
 
 func findItemInOrder(items []string, needle string) bool {
 	for _, item := range items {
