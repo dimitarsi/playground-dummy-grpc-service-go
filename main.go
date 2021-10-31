@@ -1,9 +1,12 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"net"
+	"strings"
 
+	"github.com/dimitarsi/hello-grpc/client"
 	"github.com/dimitarsi/hello-grpc/service"
 	"google.golang.org/grpc"
 )
@@ -13,6 +16,19 @@ const (
 )
 
 func main() {
+
+	var clientArg string;
+
+	flag.StringVar(&clientArg, "client", "", "Run as client")
+
+	flag.Parse()
+
+	if strings.Contains(clientArg, "true") {
+		client.RunClient()
+
+		return
+	}
+
 	lis, err := net.Listen("tcp", port)
 
 	if err != nil {
