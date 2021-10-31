@@ -1,0 +1,18 @@
+{
+  "details": {
+    "methodFqn": "ecommerce.OrderManagement.updateOrders"
+  },
+  "requests": [
+    {
+      "location": "updateOrders-request-0.json"
+    },
+    {
+      "location": "updateOrders-request-1.json"
+    },
+    {
+      "location": "updateOrders-request-2.json"
+    }
+  ],
+  "operationType": "clientStreaming",
+  "invokerName": "grpc"
+}

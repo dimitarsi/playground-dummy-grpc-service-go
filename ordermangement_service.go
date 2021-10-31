@@ -3,10 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
+	"io"
 	"log"
 	"strings"
 
 	pb "github.com/dimitarsi/hello-grpc/service"
+	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -40,6 +42,30 @@ func (s *OrderManagementServer) SearchOrder(in *wrapperspb.StringValue, server p
 
 	return nil
 }
+
+
+func (s *OrderManagementServer) UpdateOrders(stream pb.OrderManagement_UpdateOrdersServer) error {
+	counter := 0
+	for {
+		order, err := stream.Recv()
+
+		if err == io.EOF {
+			msg := wrapperspb.StringValue{
+				Value: fmt.Sprintf("Total items received: %d", counter),
+			}
+
+			return stream.SendAndClose(&msg)
+		}
+
+		counter += 1
+
+		id := fmt.Sprintf("%d", uuid.New().ID())
+		order.Id = id;
+
+		s.OrdersMap[id] = *order
+	}
+}
+
 
 func findItemInOrder(items []string, needle string) bool {
 	for _, item := range items {

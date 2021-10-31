@@ -1,0 +1,10 @@
+{
+  "id": "fooBar",
+  "description": "fooBar",
+  "price": 1.23,
+  "items": [
+    "fooBar",
+    "fooBar"
+  ],
+  "destination": "fooBar"
+}
